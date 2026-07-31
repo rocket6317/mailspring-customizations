@@ -217,8 +217,6 @@ class AIWritingButton extends React.Component {
   };
 
   render() {
-    if (this.props.draft.plaintext) return React.createElement('span', null);
-
     return React.createElement(
       'button',
       {

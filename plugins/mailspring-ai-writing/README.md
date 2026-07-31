@@ -15,6 +15,7 @@ Private, on-device email writing assistance powered by Apple Foundation Models.
 - Always-on native spellchecking while typing, with local dictionary suggestions
 - Preview and edit results before replacing draft text
 - Uses selected text when available, otherwise the whole draft
+- Available in both rich-text and plain-text composers
 - Deterministic generation and safeguards against suspiciously expanded rewrites
 
 ## Privacy

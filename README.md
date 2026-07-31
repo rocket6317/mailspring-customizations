@@ -22,9 +22,11 @@ WhatsApp Web without modifying Mailspring itself.
   Models, plus persistent native spellchecking.
 - [`plugins/mailspring-draft-list-fix`](plugins/mailspring-draft-list-fix) -
   Inbox-style Drafts rows with previews and consistent keyboard deletion.
+- [`plugins/mailspring-macos-conveniences`](plugins/mailspring-macos-conveniences) -
+  native macOS behavior improvements, including direct menu-bar window restore.
 - [`plugins/mailspring-whatsapp-web`](plugins/mailspring-whatsapp-web) - a
   persistent WhatsApp Web tab with notifications, unread counts, mailbox
-  navigation, a mail-sync shortcut, and direct macOS menu-bar window restore.
+  navigation, and a mail-sync shortcut.
 
 Each package has its own README with detailed requirements, limitations, and
 installation instructions.
@@ -62,7 +64,7 @@ README before installing it on another version.
   text to an external AI provider.
 - WhatsApp Web data remains in its isolated Mailspring/Electron partition. The
   partition and login state are not stored in this repository.
-- The theme and Draft List Fix do not transmit data.
+- The theme, Draft List Fix, and macOS Conveniences do not transmit data.
 
 ## Development
 
@@ -71,6 +73,7 @@ Run the available plugin tests from the repository root:
 ```bash
 node --test plugins/mailspring-ai-writing/tests/*.test.js
 node --test plugins/mailspring-draft-list-fix/tests/*.test.js
+node --test plugins/mailspring-macos-conveniences/tests/*.test.js
 ```
 
 ## Excluded Work

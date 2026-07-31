@@ -1,0 +1,14 @@
+{
+  "name": "mailspring-macos-conveniences",
+  "displayName": "macOS Conveniences",
+  "version": "0.1.0",
+  "description": "Small native macOS behavior improvements for Mailspring.",
+  "main": "./lib/main",
+  "license": "MIT",
+  "engines": {
+    "mailspring": "*"
+  },
+  "windowTypes": {
+    "default": true
+  }
+}

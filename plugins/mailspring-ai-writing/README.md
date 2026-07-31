@@ -42,9 +42,9 @@ automatic replacements.
 
 ## Installation
 
-1. Download and extract the latest release.
+1. Download or clone the `mailspring-customizations` repository.
 2. In Mailspring, choose **Developer > Install a Package Manually**.
-3. Select the extracted `mailspring-ai-writing` folder.
+3. Select the `plugins/mailspring-ai-writing` folder.
 4. Restart Mailspring.
 
 ## Limitations

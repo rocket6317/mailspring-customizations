@@ -1,0 +1,141 @@
+@import 'ui-variables';
+
+.toolbar-window-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  min-width: 50px;
+  width: 50px;
+}
+
+.toolbar-window-controls button {
+  background-color: @sidebar-text;
+  background-image: none !important;
+  float: none;
+  opacity: 1;
+  margin: 0;
+  width: 12px;
+  height: 12px;
+  transform: none;
+  border-radius: 50%;
+  transition-duration: 150ms;
+  transition-property: opacity;
+}
+body.platform-linux .toolbar-window-controls button {
+  width: 12px;
+  height: 12px;
+  margin: 0;
+}
+
+.toolbar-window-controls:hover button {
+  opacity: 1;
+  border-radius: 50%;
+  transform: none;
+}
+
+// Keep the native 14px traffic-light appearance while providing a larger,
+// non-overlapping target for each macOS window action.
+body.platform-darwin .toolbar-window-controls {
+  gap: 5px;
+  min-width: 64px;
+  width: 64px;
+}
+
+body.platform-darwin .toolbar-window-controls button {
+  position: relative;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  background-color: transparent;
+}
+
+body.platform-darwin .toolbar-window-controls button::before {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  left: 2px;
+  content: '';
+  background-color: @sidebar-text;
+  border-radius: 50%;
+}
+
+body.platform-darwin .toolbar-window-controls button:active::before {
+  filter: brightness(0.78);
+}
+
+.toolbar-window-controls .close {
+  background-color: @danger;
+}
+
+body.platform-darwin .toolbar-window-controls .close::before {
+  background-color: @danger;
+}
+
+.toolbar-window-controls .minimize {
+  background-color: @minimize;
+}
+
+body.platform-darwin .toolbar-window-controls .minimize::before {
+  background-color: @minimize;
+}
+
+.toolbar-window-controls .maximize {
+  background-color: @maximize;
+}
+
+body.platform-darwin .toolbar-window-controls .maximize::before {
+  background-color: @maximize;
+}
+
+.is-blurred .toolbar-window-controls .close {
+  background-color: @danger;
+}
+
+.is-blurred .toolbar-window-controls .minimize {
+  background-color: @minimize;
+}
+
+.is-blurred .toolbar-window-controls .maximize {
+  background-color: @maximize;
+}
+
+body.platform-darwin.is-blurred .toolbar-window-controls button {
+  background-color: transparent;
+}
+
+body.platform-darwin.is-blurred .toolbar-window-controls button::before {
+  background-color: #5a5a5e;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.32);
+}
+
+// Compose Button Overrides
+.sheet-toolbar .btn.btn-toolbar.item-compose {
+  background: transparent;
+  box-shadow: none;
+  opacity: 0.5;
+  margin: 0;
+  height: 100%;
+  transition: opacity 200ms;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+// Compose button icon color
+.sheet-toolbar .btn.btn-toolbar.item-compose img.content-mask {
+  background-color: @sidebar-text;
+}
+
+// Activity List
+.toolbar-activity {
+  margin-right: 8px;
+}
+
+.activity-list-container {
+  .disclosure-triangle div {
+    margin-left: 4px;
+    margin-top: -2px;
+  }
+}

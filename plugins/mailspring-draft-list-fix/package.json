@@ -1,0 +1,14 @@
+{
+  "name": "mailspring-draft-list-fix",
+  "displayName": "Draft List Fix",
+  "version": "0.4.0",
+  "description": "Makes Mailspring's Drafts mailbox look and behave like the Inbox list.",
+  "main": "./lib/main",
+  "license": "MIT",
+  "engines": {
+    "mailspring": "*"
+  },
+  "windowTypes": {
+    "default": true
+  }
+}

@@ -1,0 +1,66 @@
+// All themes need a file called `ui-variables` that extends from the base
+// variables and overrides colors, padding, etc. Other plugins import
+// `ui-variables` to make their custom CSS react to the current theme.
+@import 'base/ui-variables';
+
+@accent: #0a84ff;
+@sidebar: #232325;
+@threadlist-bg: #1c1c1e;
+@messagelist-bg: #111113;
+
+@accent-primary: @accent;
+@active-thread-text: #ffffff;
+@sidebar-text: #a1a1a6;
+@active-sidebar-text: #ffffff;
+@border-color: #313136;
+@danger: #ff5f56;
+@minimize: #fbd852;
+@maximize: #8dd07d;
+@swipe-archive: #8dd07d;
+@swipe-snooze: #fbd852;
+@swipe-trash: @danger;
+@invalid: @danger;
+
+@sidebar-margin: 12px;
+
+@font-family-sans-serif: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+@font-family: @font-family-sans-serif;
+@font-family-heading: @font-family-sans-serif;
+
+@gray-base: #ffffff;
+@gray-darker: darken(@gray-base, 13.5%);
+@gray-dark: darken(@gray-base, 20%);
+@gray: darken(@gray-base, 33.5%);
+@gray-light: darken(@gray-base, 46.7%);
+@gray-lighter: darken(@gray-base, 92.5%);
+@white: #101012;
+
+@background-primary: #1c1c1e;
+@background-off-primary: #19191b;
+@background-secondary: #141416;
+@background-tertiary: #2c2c2e;
+@border-color-primary: #35353a;
+@border-color-secondary: #2c2c30;
+@border-color-tertiary: #44444a;
+@border-color-divider: #2c2c30;
+
+@text-color: #f2f2f7;
+@text-color-subtle: #aeaeb2;
+@text-color-very-subtle: #7c7c80;
+@text-color-inverse: #ffffff;
+@text-color-heading: #ffffff;
+@text-color-link: @accent;
+@text-color-link-hover: lighten(@accent, 8%);
+@text-color-link-active: darken(@accent, 5%);
+
+@btn-default-bg-color: #2c2c2e;
+@btn-border-color: #3a3a3c;
+@dropdown-default-bg-color: #262628;
+@input-bg: #2c2c2e;
+@input-border: #3a3a3c;
+@list-bg: @threadlist-bg;
+@list-border: @border-color;
+@list-selected-color: #ffffff;
+@list-focused-color: #ffffff;
+@toolbar-background-color: @sidebar;
+@panel-background-color: @sidebar;

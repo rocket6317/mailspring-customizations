@@ -1,0 +1,16 @@
+{
+  "name": "mailspring-ai-writing",
+  "displayName": "AI Writing",
+  "version": "0.1.2",
+  "description": "Private on-device email writing assistance using Apple Foundation Models.",
+  "main": "./lib/main",
+  "license": "MIT",
+  "engines": {
+    "mailspring": "*"
+  },
+  "windowTypes": {
+    "default": true,
+    "composer": true,
+    "thread-popout": true
+  }
+}

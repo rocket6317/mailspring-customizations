@@ -1,0 +1,154 @@
+// Drafts use click focus like the Inbox; the checkbox-only selection UI is unnecessary.
+.draft-list .list-column-Check {
+  display: none !important;
+}
+
+.draft-list-inbox-style .list-column-Item {
+  align-items: stretch;
+  display: block;
+  padding: 8px 14px 9px 10px;
+}
+
+.draft-inbox-row {
+  align-items: flex-start;
+  display: flex;
+  height: 100%;
+  line-height: 19px;
+  min-width: 0;
+  width: 100%;
+}
+
+.draft-avatar {
+  flex: 0 0 34px;
+  height: 34px;
+  margin: 2px 9px 0 0;
+  overflow: hidden;
+  pointer-events: none;
+  width: 34px;
+}
+
+.draft-avatar,
+.draft-avatar .contact-profile-photo,
+.draft-avatar .profile-photo,
+.draft-avatar .default-profile-image,
+.draft-avatar .layer,
+.draft-avatar img {
+  border-radius: 50%;
+  height: 34px !important;
+  width: 34px !important;
+}
+
+.draft-avatar .layer {
+  background-position: center;
+  background-size: cover;
+}
+
+.draft-avatar-empty {
+  align-items: center;
+  background: #48484a;
+  color: #d1d1d6;
+  display: flex;
+  font-size: 15px;
+  justify-content: center;
+}
+
+.draft-inbox-content {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.draft-inbox-header {
+  align-items: center;
+  display: flex;
+  min-height: 21px;
+  min-width: 0;
+}
+
+.draft-inbox-header .participants {
+  color: #d8d8dc;
+  flex-shrink: 1;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.draft-inbox-header .participants.no-recipients {
+  color: #8e8e93;
+}
+
+.draft-inbox-spacer {
+  flex: 1;
+}
+
+.draft-inbox-status {
+  color: #aeaeb2;
+  flex-shrink: 0;
+  font-size: 13px;
+  margin-left: 8px;
+  opacity: 1;
+}
+
+.draft-inbox-status .timestamp {
+  font-size: inherit;
+  margin: 0;
+  min-width: 0;
+  opacity: 1;
+}
+
+.draft-inbox-content .subject {
+  color: #d0d0d4;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 19px;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.draft-inbox-content .snippet-and-labels {
+  align-items: center;
+  display: flex;
+  min-height: 18px;
+  min-width: 0;
+}
+
+.draft-inbox-content .snippet {
+  color: #a1a1a6;
+  flex: 1;
+  font-size: 13px;
+  line-height: 18px;
+  min-width: 0;
+  opacity: 1;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.draft-inbox-content .thread-icon-attachment {
+  flex-shrink: 0;
+  margin-left: 6px;
+}
+
+.draft-list-inbox-style .list-tabular-item.focused .draft-inbox-header .participants,
+.draft-list-inbox-style .list-tabular-item.selected .draft-inbox-header .participants,
+.draft-list-inbox-style .list-tabular-item.keyboard-cursor .draft-inbox-header .participants,
+.draft-list-inbox-style .list-tabular-item.focused .draft-inbox-content .subject,
+.draft-list-inbox-style .list-tabular-item.selected .draft-inbox-content .subject,
+.draft-list-inbox-style .list-tabular-item.keyboard-cursor .draft-inbox-content .subject {
+  color: #ffffff;
+}
+
+.draft-list-inbox-style .list-tabular-item.focused .draft-inbox-content .snippet,
+.draft-list-inbox-style .list-tabular-item.selected .draft-inbox-content .snippet,
+.draft-list-inbox-style .list-tabular-item.keyboard-cursor .draft-inbox-content .snippet,
+.draft-list-inbox-style .list-tabular-item.focused .draft-inbox-status,
+.draft-list-inbox-style .list-tabular-item.selected .draft-inbox-status,
+.draft-list-inbox-style .list-tabular-item.keyboard-cursor .draft-inbox-status {
+  color: #d2d2d7;
+}

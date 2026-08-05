@@ -12,6 +12,7 @@ not belong to a mail service, theme, or integration plugin.
 - Right-click the menu-bar icon to retain the standard Open Inbox, New Message,
   Preferences, and Quit menu.
 - Restore Mailspring's normal automatic tray menu if the plugin is disabled.
+- Pull down while the email list is already at the top to sync new mail.
 - Leave non-macOS platforms unchanged.
 
 ## Installation

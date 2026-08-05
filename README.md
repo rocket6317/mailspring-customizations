@@ -24,7 +24,7 @@ WhatsApp Web without modifying Mailspring itself.
   Inbox-style Drafts rows with previews and consistent keyboard deletion.
 - [`plugins/mailspring-macos-conveniences`](plugins/mailspring-macos-conveniences) -
   native macOS behavior improvements, including direct menu-bar window restore
-  and pull-to-sync from the top of the email list.
+  and animated pull-to-sync with protection against overlapping folder scans.
 - [`plugins/mailspring-whatsapp-web`](plugins/mailspring-whatsapp-web) - a
   persistent WhatsApp Web tab with notifications, unread counts, mailbox
   navigation, and a mail-sync shortcut.

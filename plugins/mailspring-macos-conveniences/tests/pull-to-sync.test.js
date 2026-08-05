@@ -3,11 +3,14 @@
 const assert = require('assert');
 const { createPullToSync, pullDistance } = require('../lib/pull-to-sync');
 
-function makeHarness() {
+function makeHarness({ canSync = () => true } = {}) {
   const listeners = new Map();
   const timers = new Map();
   let nextTimer = 1;
   let syncCount = 0;
+  const pullStates = [];
+  let resetCount = 0;
+  let syncingCount = 0;
   let time = 10000;
   const viewport = { scrollTop: 0, clientHeight: 500 };
   const root = {
@@ -25,6 +28,14 @@ function makeHarness() {
       syncCount += 1;
     },
     findViewport: target => (target === 'thread-list' ? viewport : null),
+    onPull: state => pullStates.push(state),
+    onReset: () => {
+      resetCount += 1;
+    },
+    onSync: () => {
+      syncingCount += 1;
+    },
+    canSync,
     now: () => time,
     setTimer: callback => {
       const id = nextTimer++;
@@ -39,6 +50,9 @@ function makeHarness() {
     listeners,
     viewport,
     syncCount: () => syncCount,
+    pullStates,
+    resetCount: () => resetCount,
+    syncingCount: () => syncingCount,
     advance(ms) {
       time += ms;
     },
@@ -54,12 +68,35 @@ function makeHarness() {
 }
 
 {
+  let available = false;
+  const harness = makeHarness({ canSync: () => available });
+  harness.wheel(-40);
+  harness.wheel(-40);
+  harness.wheel(-40);
+  assert.strictEqual(harness.pullStates.at(-1).available, false);
+  harness.endGesture();
+  assert.strictEqual(harness.syncCount(), 0, 'an active sync blocks pull-to-sync');
+
+  available = true;
+  harness.wheel(-40);
+  harness.wheel(-40);
+  harness.wheel(-40);
+  available = false;
+  harness.endGesture();
+  assert.strictEqual(harness.syncCount(), 0, 'readiness is checked again on release');
+}
+
+{
   const harness = makeHarness();
   harness.wheel(-40);
   harness.wheel(-40);
   assert.strictEqual(harness.syncCount(), 0);
   harness.wheel(-40);
+  assert.strictEqual(harness.syncCount(), 0, 'sync waits for release');
+  assert.strictEqual(harness.pullStates.at(-1).ready, true);
+  harness.endGesture();
   assert.strictEqual(harness.syncCount(), 1);
+  assert.strictEqual(harness.syncingCount(), 1);
   harness.wheel(-40);
   assert.strictEqual(harness.syncCount(), 1, 'one pull must only sync once');
 
@@ -81,6 +118,7 @@ function makeHarness() {
   harness.wheel(-40);
   harness.wheel(-40);
   harness.wheel(-40);
+  harness.endGesture();
   assert.strictEqual(harness.syncCount(), 1);
 }
 
@@ -94,7 +132,16 @@ function makeHarness() {
   harness.wheel(-40);
   harness.wheel(-40);
   harness.wheel(-40);
+  harness.endGesture();
   assert.strictEqual(harness.syncCount(), 2, 'a later pull must sync again');
+}
+
+{
+  const harness = makeHarness();
+  harness.wheel(-40);
+  harness.wheel(10);
+  assert.strictEqual(harness.syncCount(), 0);
+  assert.strictEqual(harness.resetCount(), 1, 'reversing the pull cancels the gesture');
 }
 
 assert.strictEqual(pullDistance({ deltaY: -3, deltaMode: 1 }, {}), 48);

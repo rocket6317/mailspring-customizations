@@ -1,0 +1,73 @@
+@import 'ui-variables';
+
+.thread-list.pull-to-sync-list > .scroll-region {
+  transform: translateY(var(--pull-to-sync-offset, 0));
+  will-change: transform;
+}
+
+.thread-list.pull-to-sync-list.pull-to-sync-settling > .scroll-region {
+  transition: transform 180ms cubic-bezier(0.22, 0.72, 0.2, 1);
+}
+
+.pull-to-sync-indicator-host {
+  position: fixed;
+  z-index: 7;
+  height: 48px;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+
+  &.is-visible {
+    visibility: visible;
+  }
+}
+
+.pull-to-sync-indicator {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 44px;
+  color: @text-color-subtle;
+  background: @background-secondary;
+  border-bottom: 1px solid @border-color-divider;
+  font-size: 12px;
+  font-weight: 500;
+  transform: translateY(calc(var(--pull-to-sync-offset, 0px) - 44px));
+}
+
+.pull-to-sync-indicator-host.is-settling .pull-to-sync-indicator,
+.pull-to-sync-indicator-host.is-syncing .pull-to-sync-indicator {
+  transition: transform 180ms cubic-bezier(0.22, 0.72, 0.2, 1);
+}
+
+.pull-to-sync-icon {
+  display: block;
+  width: 15px;
+  height: 15px;
+  background: currentColor;
+  transform: rotate(var(--pull-to-sync-rotation, 0deg));
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M17.7 6.3A7.8 7.8 0 0 0 4.6 10H2.4A9.8 9.8 0 0 1 19.1 4.9L21 3v6h-6l2.7-2.7zM6.3 17.7A7.8 7.8 0 0 0 19.4 14h2.2A9.8 9.8 0 0 1 4.9 19.1L3 21v-6h6l-2.7 2.7z'/></svg>");
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+}
+
+.pull-to-sync-indicator-host.is-ready-true .pull-to-sync-indicator {
+  color: #0a84ff;
+}
+
+.pull-to-sync-indicator-host.is-syncing .pull-to-sync-icon {
+  color: #0a84ff;
+  animation: pull-to-sync-spin 700ms linear infinite;
+}
+
+@keyframes pull-to-sync-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -27,6 +27,10 @@ function createPullToSync({
   cooldown = DEFAULT_COOLDOWN,
   gestureEndDelay = DEFAULT_GESTURE_END_DELAY,
   findViewport = findThreadListViewport,
+  onPull = () => {},
+  onReset = () => {},
+  onSync = () => {},
+  canSync = () => true,
   now = Date.now,
   setTimer = setTimeout,
   clearTimer = clearTimeout,
@@ -39,10 +43,24 @@ function createPullToSync({
   let resetTimer = null;
   let lastSyncAt = -Infinity;
 
-  const endGesture = () => {
+  const clearGesture = () => {
     gesture = null;
     if (resetTimer !== null) clearTimer(resetTimer);
     resetTimer = null;
+  };
+
+  const endGesture = (syncIfReady = true) => {
+    const finishedGesture = gesture;
+    clearGesture();
+
+    if (syncIfReady && finishedGesture && finishedGesture.ready && canSync()) {
+      lastSyncAt = now();
+      sync();
+      onSync({ viewport: finishedGesture.viewport });
+      return;
+    }
+
+    if (finishedGesture) onReset({ viewport: finishedGesture.viewport });
   };
 
   const scheduleGestureEnd = () => {
@@ -61,23 +79,29 @@ function createPullToSync({
       gesture = {
         startedAtTop: viewport.scrollTop <= 1,
         distance: 0,
-        triggered: false,
+        ready: false,
+        viewport,
       };
     }
     scheduleGestureEnd();
 
-    if (!gesture.startedAtTop || viewport.scrollTop > 1 || event.deltaY >= 0) return;
+    if (!gesture.startedAtTop || viewport.scrollTop > 1) return;
+    if (event.deltaY >= 0) {
+      endGesture(false);
+      return;
+    }
 
     gesture.distance += Math.min(MAX_EVENT_DISTANCE, pullDistance(event, viewport));
-    if (
-      !gesture.triggered &&
-      gesture.distance >= threshold &&
-      now() - lastSyncAt >= cooldown
-    ) {
-      gesture.triggered = true;
-      lastSyncAt = now();
-      sync();
-    }
+    const available = canSync();
+    gesture.ready =
+      gesture.distance >= threshold && now() - lastSyncAt >= cooldown && available;
+    onPull({
+      viewport,
+      distance: gesture.distance,
+      progress: Math.min(1, gesture.distance / threshold),
+      ready: gesture.ready,
+      available,
+    });
   };
 
   root.addEventListener('wheel', onWheel, { capture: true, passive: true });
@@ -85,7 +109,7 @@ function createPullToSync({
   return {
     deactivate() {
       root.removeEventListener('wheel', onWheel, true);
-      endGesture();
+      endGesture(false);
     },
     onWheel,
   };

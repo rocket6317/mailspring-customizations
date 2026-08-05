@@ -12,8 +12,20 @@ not belong to a mail service, theme, or integration plugin.
 - Right-click the menu-bar icon to retain the standard Open Inbox, New Message,
   Preferences, and Quit menu.
 - Restore Mailspring's normal automatic tray menu if the plugin is disabled.
-- Pull down while the email list is already at the top to sync new mail.
+- Pull down while the email list is already at the top to reveal a native-style
+  refresh indicator, then release to sync new mail.
+- Prevent pull-to-sync from overlapping startup or an active folder sync.
 - Leave non-macOS platforms unchanged.
+
+## Pull To Sync
+
+Open a mailbox, scroll to the top of the email list, then pull down and release
+when the indicator says **Release to sync**. The list and indicator animate with
+the gesture.
+
+While Mailspring is starting, already syncing, or finishing a recent sync, the
+indicator says **Finishing sync…** and does not start another request. This avoids
+overlapping scans and stale folder-progress displays.
 
 ## Installation
 
